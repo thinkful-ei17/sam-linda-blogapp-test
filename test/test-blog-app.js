@@ -1,5 +1,8 @@
 'use strict';
 
+//NOTE: IMPORTANT - WHEN CONNECTING TRAVISCI and HEROKU, yml 'app' must reflect HEROKU database name
+
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker'); //library that helps with generating random seedData
