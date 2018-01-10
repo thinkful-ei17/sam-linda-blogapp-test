@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: J/03nvSlsCt8AC6+fO50fDE6Qk/CwGjbVhS6F312ybAUvLmsk6b5JCRUDVr3Y8a9nE3Mdy130V+cmZoSSv0kvoAGoZyY+6RlcJ1rySHJd4fXTKwvAxqWGIpt9NVdBuXAN0ZJt1sahH9QOg0yvGyMS0FrpKKHaOiFmNGh9ja+xR7y+zKfcv93It8x77cFbOdw9ONs1R7WubfmHHIxDWFQGXcDV0qad+37RBBSzEZb9mvV8pqcFuJ4c9nLadnRVPbDw4gHDYdo2Mleqg4LmmND6aidOzUoigfEGfbWliydxl+8oqIrHW1f24DIQyPGCQRqJMo3z91dMim0SrHFRvo1g+jH1vlvlxNrg0HsZoNIEwV+xHYqRoYoFvvPGaWBaWNnbSrRMJ9o/F+/ZwvzczHdT4oa6PgnSMwPTrIQ5ndFoQ5CVOMa4x7bs4TKF8DejdvXqOFKsd83wPcAAuFqw5t7zH0Knn6CYdpXzT/ua/ZvmN758SWh+7hbCw/c6lxGLPnZC8GBlkpljtIZf0mq2mzW6KzsQp/z9wbN+rWE2HRx3X6qsu+28f4EGHkRw9UXMQyOJNM7sKbttQXL7iICbSkfxQQ7v5pNZuHQIf720Zoit+e/sPUqb2VLyJ6mRlIn1lhwOvAkFlRg+VZIY92qQ1+akyASUOHCp6I/C7QpCGsWLOo=
+  app: Y
+  on:
+    repo: thinkful-ei17/sam-linda-blogapp-test
