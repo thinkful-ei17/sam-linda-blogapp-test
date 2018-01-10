@@ -17,9 +17,7 @@ app.use(bodyParser.json());
 app.get('/posts', (req, res) => {
   BlogPost
     .find()
-    .then(posts => {
-      res.json(posts.map(post => post.serialize()));
-    })
+    .then(posts => res.json(posts.map(post => post.serialize())))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
