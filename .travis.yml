@@ -6,6 +6,6 @@ deploy:
   provider: heroku
   api_key:
     secure: tprZOMP6TIjG0AxZUiGjCSRWCKnZfvtkGqwbu3RBGz12Ont5fRERYBYHKEztD43zJHyPGZKoeH1cX0y5O0OuVe70TMob1fs8I23nSISwCg9sv5W2Dh++UhnHdJm9N7Y/qaG7gqPOdybRixfIGt+y8ZNyZiyT8bUcd3p20iw31PO9W+KiPUQX3m5vVncKbg3a8u59apUangnfwVRIORTxhAulrC0O9Pf2YifeaNbqAjIp47EzOyTLUVwhQVUXlBqkYpjvmKUlf8ch7sBiuswgj5TDWvispUzyfMo8g8ACTW2+iKcgus4qahr/VBA3Nz5hChdqxouMOs54VgW5vpBpULqoRy7qkgZKtTiQvHQrb3X7sSiZj/Iod3QFefok+wvu+KPVhP7t3jUNCt/bKbxTweQ9NLpZkiAXfXKVrT8kuH5F4F9/4o2uqp815scOO33yACTAvINlEG8pii+WOLYO+Dy57LzeV2yk9GVBXlxo4BuvVwWJlmXbxAl3yY9ElxJESpFhHG1wzpQ293SE7OyIMIGio6Fe9r8XYEfENZmHSe9a+L+xn3wT0sS1MWZzfchbf21gVVYrG3oK0gtWUE27pWewvPVHRiwxT+iTK0VeVxLX2rz2YUMzLLQfQCxypeadxAZ5uRipKKxZ/kHnD7HW3j5ud6yAHe7U/gArGvhPr1Q=
-  app: sam-linda-blogapp-test
+  app: sam-linda
   on:
     repo: thinkful-ei17/sam-linda-blogapp-test
