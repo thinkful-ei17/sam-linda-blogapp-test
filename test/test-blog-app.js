@@ -79,11 +79,12 @@ describe('BlogPosts API resource', function() {
     console.log('API resource after ran');
     return closeServer();
   });
-});
 
-describe('GET endpoint', function() {
+  describe('GET endpoint', function() {
 
-  it('should return all existing blog posts', function() {
+    it('should return all existing blog posts', function() {
+    //  console.log('test false ran');
+    // expect(false).be.false;
     // strategy:
     //    1. get back all blogposts returned by GET request to `/posts`
     //    2. prove res has right status, data type
@@ -92,51 +93,56 @@ describe('GET endpoint', function() {
     //
     // need to have access to mutate and access `res` across
     // `.then()` calls below, so declare it here so can modify in place
-    let res;
-    return chai.request(app)
-      .get('/posts')
-      .then(function(_res) {
+      let res;
+      return chai.request(app)
+        .get('/posts')
+        .then(function(_res) {
         // so subsequent .then blocks can access response object
-        res = _res;
-        expect(res).to.have.status(200);
-        // otherwise our db seeding didn't work
-        expect(res.body.blogposts).to.have.length.of.at.least(1); 
-        return BlogPost.count();
-      })
-      .then(function(count) {
-        expect(res.body.blogposts).to.have.length.of(count);
-      });
-  });
-
-
-  it('should return blogposts with right fields', function() {
-    // Strategy: Get back all blog posts, and ensure they have expected keys
-
-    let resBlog;
-    return chai.request(app)
-      .get('/posts')
-      .then(function(res) {
-        expect(res).to.have.status(200);
-        expect(res).to.be.json;
-        expect(res.body.blogposts).to.be.a('array');
-        expect(res.body.blogposts).to.have.length.of.at.least(1);
-
-        res.body.blogposts.forEach(function(blogpost) {
-          expect(blogpost).to.be.a('object');
-          expect(blogpost).to.include.keys(
-            'id', 'author', 'title', 'content','created');
+          res = _res;
+          expect(res).to.have.status(200);
+          // otherwise our db seeding didn't work
+          //console.log('what is body', res.body.length);
+          //console.log('what is count', BlogPost.count);
+          console.log()
+          expect(res.body.posts).to.have.length.of.at.least(1); 
+          return BlogPost.count();
+        })
+        .then(function(count) {
+          expect(res.body.posts).to.have.length.of(count);
         });
-        resBlog = res.body.blogposts[0];
-        return BlogPost.findById(resBlog.id);
-      })
-      .then(function(blogpost) {
+    });
 
-        expect(resBlog.id).to.equal(blogpost.id);
-        expect(resBlog.author).to.equal(blogpost.author);
-        expect(resBlog.title).to.equal(blogpost.title);
-        expect(resBlog.content).to.equal(blogpost.content);
-        expect(resBlog.created).to.equal(blogpost.created); //???
-      });
+
+    it('should return blogposts with right fields', function() {
+      // Strategy: Get back all blog posts, and ensure they have expected keys
+      //console.log('test true ran');
+      //expect(true).be.true;
+      let resBlog;
+      return chai.request(app)
+        .get('/posts')
+        .then(function(res) {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          expect(res.body.blogposts).to.be.a('array');
+          expect(res.body.blogposts).to.have.length.of.at.least(1);
+
+          res.body.blogposts.forEach(function(blogpost) {
+            expect(blogpost).to.be.a('object');
+            expect(blogpost).to.include.keys(
+              'id', 'author', 'title', 'content','created');
+          });
+          resBlog = res.body.blogposts[0];
+          return BlogPost.findById(resBlog.id);
+        })
+        .then(function(blogpost) {
+
+          expect(resBlog.id).to.equal(blogpost.id);
+          expect(resBlog.author).to.equal(blogpost.author);
+          expect(resBlog.title).to.equal(blogpost.title);
+          expect(resBlog.content).to.equal(blogpost.content);
+          expect(resBlog.created).to.equal(blogpost.created); 
+        });
+    });
   });
-});
 
+});
