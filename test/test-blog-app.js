@@ -149,38 +149,30 @@ describe('BlogPosts API resource', function() {
     // the data was inserted into db)
     it('should add a new blogpost', function() {
 
-      const newRestaurant = generateBlogData();
-      let mostRecentGrade;
+      const newBlogPost = generateBlogData();
 
       return chai.request(app)
-        .post('/restaurants')
-        .send(newRestaurant)
+        .post('/posts')
+        .send(newBlogPost)
         .then(function(res) {
           expect(res).to.have.status(201);
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
+          console.log(res.body);
           expect(res.body).to.include.keys(
-            'id', 'name', 'cuisine', 'borough', 'grade', 'address');
-          expect(res.body.name).to.equal(newRestaurant.name);
+            'id', 'author', 'title', 'content','created');
+          expect(res.body.author).to.contain(newBlogPost.author.firstName);
           // cause Mongo should have created id on insertion
           expect(res.body.id).to.not.be.null;
-          expect(res.body.cuisine).to.equal(newRestaurant.cuisine);
-          expect(res.body.borough).to.equal(newRestaurant.borough);
-
-          mostRecentGrade = newRestaurant.grades.sort(
-            (a, b) => b.date - a.date)[0].grade;
-
-          expect(res.body.grade).to.equal(mostRecentGrade);
-          return Restaurant.findById(res.body.id);
+          expect(res.body.title).to.equal(newBlogPost.title);
+          expect(res.body.content).to.equal(newBlogPost.content);
+          return BlogPost.findById(res.body.id);
         })
         .then(function(restaurant) {
-          expect(restaurant.name).to.equal(newRestaurant.name);
-          expect(restaurant.cuisine).to.equal(newRestaurant.cuisine);
-          expect(restaurant.borough).to.equal(newRestaurant.borough);
-          expect(restaurant.grade).to.equal(mostRecentGrade);
-          expect(restaurant.address.building).to.equal(newRestaurant.address.building);
-          expect(restaurant.address.street).to.equal(newRestaurant.address.street);
-          expect(restaurant.address.zipcode).to.equal(newRestaurant.address.zipcode);
+          expect(restaurant.author.firstName).to.equal(newBlogPost.author.firstName);
+          expect(restaurant.author.lastName).to.equal(newBlogPost.author.lastName);
+          expect(restaurant.title).to.equal(newBlogPost.title);
+          expect(restaurant.content).to.equal(newBlogPost.content);
         });
     });
   });
