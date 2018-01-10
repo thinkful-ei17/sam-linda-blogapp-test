@@ -62,6 +62,7 @@ describe('BlogPosts API resource', function() {
   // so we return the value returned by these function calls.
   before(function() {
     console.log('API resource before ran');
+    console.log('Hello');
     return runServer(TEST_DATABASE_URL);
   });
 
