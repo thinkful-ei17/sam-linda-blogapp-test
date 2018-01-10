@@ -177,4 +177,65 @@ describe('BlogPosts API resource', function() {
     });
   });
 
+  describe('PUT endpoint', function() {
+
+    // strategy:
+    //  1. Get an existing blogpost from db
+    //  2. Make a PUT request to update that blogpost
+    //  3. Prove posts returned by request contains data we sent
+    //  4. Prove blogpost in db is correctly updated
+    it('should update fields you send over', function() {
+      const updateData = {
+        title: 'Hello',
+        content: 'World!'
+      };
+
+      return BlogPost
+        .findOne()
+        .then(function(blogpost) {
+          updateData.id = blogpost.id;
+
+          // make request then inspect it to make sure it reflects
+          // data we sent
+          return chai.request(app)
+            .put(`/posts/${blogpost.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+
+          return BlogPost.findById(updateData.id);
+        })
+        .then(function(blogpost) {
+          expect(blogpost.title).to.equal(updateData.title);
+          expect(blogpost.content).to.equal(updateData.content);
+        });
+    });
+  });
+
+  describe('DELETE endpoint', function() {
+    // strategy:
+    //  1. get a post
+    //  2. make a DELETE request for that post's id
+    //  3. assert that response has right status code
+    //  4. prove that post with the id doesn't exist in db anymore
+    it('delete a post by id', function() {
+
+      let post;
+
+      return BlogPost
+        .findOne()
+        .then(function(_post) {
+          post = _post;
+          return chai.request(app).delete(`/posts/${post.id}`);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return BlogPost.findById(post.id);
+        })
+        .then(function(_post) {
+          expect(_post).to.be.null;
+        });
+    });
+  });
 });
